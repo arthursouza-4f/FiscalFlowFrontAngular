@@ -9,10 +9,11 @@
 
             <p class="text-green-500 pt-10">Clique aqui para procurar os arquivos</p>
         </div>
-        <input type="file" id="fileInput" hidden multiple />
+        <input type="file" id="fileInput" hidden multiple (change)="onChangeFileInput($event)" />
     </div>
 
-    <button data-kt-modal-toggle="#modal" type="button" class="kt-btn bg-green-500 w-30">Integrar</button>
+    <button data-kt-modal-toggle="#modal" type="button" class="kt-btn bg-green-500 w-30"
+        (click)="onClickIntegrar()">Integrar</button>
 
     <div data-kt-datatable="true" data-kt-datatable-page-size="10">
         <table class="kt-table w-full border border-gray-200" data-kt-datatable-table="true">
@@ -36,28 +37,34 @@
                 </tr>
             </thead>
             <tbody>
+                @for (item of files(); track $index) {
                 <tr>
-                    <td>123123312030303003ss.xml</td>
-                    <td>300</td>
+                    <td>{{item.name}}</td>
+                    <td>{{(item.size / (1024 * 1024)).toFixed(2)}} Mb</td>
                     <td>
-                        <button>
+                        <button (click)="onRemoveFile($index)">
                             <i class="ki-filled ki-trash text-2xl text-red-500">
                             </i>
                         </button>
                     </td>
                 </tr>
+                }
             </tbody>
         </table>
     </div>
-
 </div>
 
 
-<div class="kt-modal kt-modal-center "  data-kt-modal="true" data-kt-modal-persistent="true" id="modal">
-    <div class="kt-modal-content max-w-100">
-        <div class="kt-progress kt-progress-success h-2">
-            <div class="kt-progress-indicator w-[90%] "></div>
-        </div>
+<div class="kt-modal kt-modal-center  " data-kt-modal="true" data-kt-modal-persistent="true" id="modal">
+    <div class="flex justify-center items-center h-full ">
+        <div class=" w-full max-w-md flex-col gap-4 ">
+            <div class="kt-modal-content p-2">
+            <div class="kt-progress kt-progress-success h-2">
+                <div class="kt-progress-indicator" [style.width.%]="percentage()"></div>
+            </div>
+            <div class="mt-2">{{percentage()}}% Completo</div>
 
+            </div>
+        </div>
     </div>
 </div>
