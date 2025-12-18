@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { ThemeToggleComponent } from './theme/theme-toggle/theme-toggle.component';
 import { SidebarComponent } from './components/sidebar/sidebar/sidebar.component';
 import { MetronicInitService } from '../core/services/metronic-init.service';
-import { HeaderComponent } from './components/header/header.component';
+import { HeaderComponent } from './components/sidebar/partials/header/header.component';
 
 @Component({
   selector: 'app-root',
